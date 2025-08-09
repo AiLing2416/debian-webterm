@@ -59,12 +59,6 @@ fi
 ttyd -W -p 8080 -c "${TARGET_USER}:${FINAL_PASSWORD}" "${LOGIN_CMD[@]}" &
 ttyd -W -p 8443 --ssl --ssl-cert "$CERT_FILE" --ssl-key "$KEY_FILE" -c "${TARGET_USER}:${FINAL_PASSWORD}" "${LOGIN_CMD[@]}" &
 
-# --- 新增: 启动 miniserve 文件浏览器服务 ---
-echo ">> 正在启动 Web 文件浏览器 (miniserve)..."
-# -u 启用上传, --auth 设置认证, -p 设置端口, 最后是服务目录
-miniserve -u --auth "${TARGET_USER}:${FINAL_PASSWORD}" -p 8081 "${USER_HOME}" &
-miniserve -u --auth "${TARGET_USER}:${FINAL_PASSWORD}" -p 8444 --tls-cert "$CERT_FILE" --tls-key "$KEY_FILE" "${USER_HOME}" &
-
 # 检查是否需要启动 SSH 服务
 if [[ "${ENABLE_SSH}" =~ ^([yY][eE][sS]|[tT][rR][uU][eE]|1)$ ]]; then
     echo ">> 检测到 ENABLE_SSH=true，正在启动 SSH 服务..."
@@ -78,8 +72,6 @@ fi
 echo ">> 服务正在监听以下端口:"
 echo "    - Web 终端 (HTTP)      : 8080"
 echo "    - Web 终端 (HTTPS)     : 8443"
-echo "    - 文件浏览器 (HTTP)    : 8081"
-echo "    - 文件浏览器 (HTTPS)   : 8444"
 if [[ "${ENABLE_SSH}" =~ ^([yY][eE][sS]|[tT][rR][uU][eE]|1)$ ]]; then
     echo "    - SSH                  : 22"
 fi
