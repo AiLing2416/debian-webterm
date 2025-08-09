@@ -22,7 +22,7 @@ if [ "$TARGET_USER" != "root" ]; then
     useradd -m -d "${USER_HOME}" -s /bin/bash "$TARGET_USER"
     adduser "$TARGET_USER" sudo
     echo ">> 用户 ${TARGET_USER} 创建成功并已添加到 sudo 组。"
-    echo '\n# Enable bash-completion\n. /usr/share/bash-completion/bash_completion' >> "${USER_HOME}/.bashrc"
+    printf '\n# Enable bash-completion\n. /usr/share/bash-completion/bash_completion' >> "${USER_HOME}/.bashrc"
 
     if [[ "${SUDO_NOPASSWD}" =~ ^([yY][eE][sS]|[tT][rR][uU][eE]|1)$ ]]; then
         echo ">> 检测到 SUDO_NOPASSWD=true，为用户 ${TARGET_USER} 配置免密 sudo。"
