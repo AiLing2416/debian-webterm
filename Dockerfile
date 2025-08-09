@@ -1,8 +1,8 @@
 # 步骤 1: 选择基础镜像
-FROM debian:bookworm-slim
+FROM debian:trixie-slim
 
 # 添加镜像元数据
-LABEL maintainer="ailing2416" version="1.3" description="Debian with Web Terminal, File Browser, and optional SSH Server"
+LABEL maintainer="ailing2416" version="1.4" description="Debian with Web Terminal, File Browser, and optional SSH Server"
 
 # 步骤 2: 安装软件
 ENV DEBIAN_FRONTEND=noninteractive
