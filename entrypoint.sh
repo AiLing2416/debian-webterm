@@ -52,10 +52,7 @@ echo ">> 已为用户 ${TARGET_USER} 设置密码。"
 echo ">> 正在启动核心服务..."
 
 # 启动 ttyd 服务
-LOGIN_CMD=("$@")
-if [ "$TARGET_USER" != "root" ]; then
-    LOGIN_CMD=("login" "-f" "$TARGET_USER")
-fi
+LOGIN_CMD=("login" "-f" "$TARGET_USER")
 ttyd -W -p 8080 -c "${TARGET_USER}:${FINAL_PASSWORD}" "${LOGIN_CMD[@]}" &
 ttyd -W -p 8443 --ssl --ssl-cert "$CERT_FILE" --ssl-key "$KEY_FILE" -c "${TARGET_USER}:${FINAL_PASSWORD}" "${LOGIN_CMD[@]}" &
 
