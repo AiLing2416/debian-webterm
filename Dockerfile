@@ -2,7 +2,7 @@
 FROM debian:trixie-slim
 
 # 添加镜像元数据
-LABEL maintainer="ailing2416" version="1.4" description="Debian with Web Terminal, and optional SSH Server"
+LABEL maintainer="ailing2416" version="1.5" description="Debian with Web Terminal, and optional SSH Server"
 
 # 步骤 2: 安装软件
 ENV DEBIAN_FRONTEND=noninteractive
@@ -41,4 +41,21 @@ RUN apt-get update && \
 # 步骤 3: 配置 SSH 服务
 RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed -i 's/^#?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
+    sed -i 's/^#?PubkeyAuthentication .*/PubkeyAuthentication yes/' /etc/ssh/sshd_config && \
     mkdir -p /run/sshd && \
+    ssh-keygen -A
+    #新增自定义公钥
+
+# 步骤 4: 启用 Bash Tab 补全
+RUN echo '\n# Enable bash-completion\n. /usr/share/bash-completion/bash_completion' >> /root/.bashrc
+
+# 步骤 5: 复制并配置入口脚本
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# 步骤 6: 配置容器运行时
+EXPOSE 8080 8443 22
+# 定义容器的入口点
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+# 定义传递给入口脚本的默认命令
+CMD ["bash"]
