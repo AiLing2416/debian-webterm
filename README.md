@@ -33,3 +33,4 @@ Webterm 是一个基于 Debian 13 (Trixie) 构建的全功能云端终端镜像�
 
 ---
 完整的配置说明与部署文档请参考 [Docker Hub](https://hub.docker.com/r/ailing2416/debian-webterm)。
+示例 `MOTD` 配置文件可参考 [motd.conf](https://github.com/AiLing2416/debian-webterm/blob/main/motd.conf)。
