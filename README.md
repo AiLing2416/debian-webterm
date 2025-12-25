@@ -22,8 +22,8 @@ Webterm 是一个基于 Debian 13 (Trixie) 构建的全功能云端终端镜像�
 
 | 架构 | 版本标签 | 最新稳定标签 |
 | :--- | :--- | :--- |
-| **x86_64** | `ailing2416/debian-webterm:1.7-x64` | `x64`, `latest` |
-| **arm64** | `ailing2416/debian-webterm:1.7-arm` | `arm` |
+| **x86_64** | `ailing2416/webterm:1.7-x64` | `x64`, `latest` |
+| **arm64** | `ailing2416/webterm:1.7-arm` | `arm` |
 
 ## 功能概要
 
